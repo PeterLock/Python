@@ -1,19 +1,66 @@
 # -*- coding: utf-8 -*-
-import sys
- 
-def solution(A):
-    #1st pass
-    parts = [0] * 12
-    parts[0] = A[0]
-  
-    for idx in xrange(1, len(A)):
-        parts[idx] = A[idx] + parts[idx-1]
-  
-    #2nd pass
-    solution = sys.maxint
-    print(solution)
 
-    for idx in xrange(0, len(parts)-1):
-        solution = min(solution,abs(parts[-1] - 2 * parts[idx]));  
-  
-    return solution
+'''
+A non-empty zero-indexed array A consisting of N integers is given. Array A represents numbers
+ on a tape.
+
+Any integer P, such that 0 < P < N, splits this tape into two non-empty parts: 
+A[0], A[1], ..., A[P − 1] and A[P], A[P + 1], ..., A[N − 1].
+
+The difference between the two parts is the value of: 
+|(A[0] + A[1] + ... + A[P − 1]) − (A[P] + A[P + 1] + ... + A[N − 1])|
+
+In other words, it is the absolute difference between the sum of the first part and the sum of
+ the second part.
+
+For example, consider array A such that:
+
+  A[0] = 3
+  A[1] = 1
+  A[2] = 2
+  A[3] = 4
+  A[4] = 3
+We can split this tape in four places:
+
+P = 1, difference = |3 − 10| = 7 
+P = 2, difference = |4 − 9| = 5 
+P = 3, difference = |6 − 7| = 1 
+P = 4, difference = |10 − 3| = 7 
+Write a function:
+
+def solution(A)
+
+that, given a non-empty zero-indexed array A of N integers, returns the minimal difference that can be achieved.
+
+For example, given:
+
+  A[0] = 3
+  A[1] = 1
+  A[2] = 2
+  A[3] = 4
+  A[4] = 3
+the function should return 1, as explained above.
+
+Assume that:
+
+N is an integer within the range [2..100,000];
+each element of array A is an integer within the range [−1,000..1,000].
+Complexity:
+
+expected worst-case time complexity is O(N);
+expected worst-case space complexity is O(N), beyond input storage (not counting the storage required for input arguments).
+Elements of input arrays can be modified.
+
+'''
+def solution(A):
+    head = A[0]
+    tail = sum(A[1:])
+    min_dif = abs(head - tail)
+ 
+    for index in range(1, len(A)-1):
+        head += A[index]
+        tail -= A[index]
+        if abs(head-tail) < min_dif:
+            min_dif = abs(head-tail)
+ 
+    return min_dif
