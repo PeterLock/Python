@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def solution(N):
     cnt = 0
     result = 0

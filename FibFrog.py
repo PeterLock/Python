@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def get_fib_seq_up_to_n(N):
     # there are 26 numbers smaller than 100k
     fib = [0] * (27)
@@ -8,6 +9,7 @@ def get_fib_seq_up_to_n(N):
             return fib[2:i]
         else:
             last_valid = i
+            print(last_valid)
          
      
      
